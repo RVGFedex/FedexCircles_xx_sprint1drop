@@ -34,11 +34,6 @@ h1 {
 	padding-bottom:10px;
 }
 	
-div#pageHeaderOuter {
-	text-align: center;
-	xbackground-image:url('greybot2.png');		
-	background-color: #fff;
-}
 	div#pageHeaderInner {
 		margin-left: auto;
 		margin-right: auto;
@@ -50,48 +45,7 @@ div#pageHeaderOuter {
 		height: 75px;		
 	}
 
-div#navOuter {
-	text-align: center;
-	background-color: #16BAEE;
-}
-	div#navInner {
-		margin-left: auto;
-		margin-right: auto;
-		width: 920px;
-		padding: 5px;
-		text-align: left;
-		height: 38px;		
-	}
-	
-		ul#navlist li { 
-			display: inline;
-		}
 
-		ul#navlist li a {
-			margin: 0;	
-			border: 0;	
-			padding: 0;
-			
-			float: left;
-			color: #fff;
-		}
-
-		ul#navlist li a span {
-			padding: 0px 28px 0px 28px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			float: left;
-			color: #eee;
-			font-family: 'Francois One', sans-serif;
-			font-size: 19px;
-			font-weight: normal;
-			border-left: 1px solid #ccc;
-		}
-
-		li.navlast a span {
-			border-right: 1px solid #ccc;
-		}
-		
 div#pageBodyOuter {
 	text-align: center;
 	background-color: #F9F7F4;
@@ -124,30 +78,9 @@ div#pageFooterOuter {
 		color: #fff;
 	}
 
-div#pageSubFooterOuter {
-	background-color: #315E6F;
-	text-align: center;
-}
 
-	div#pageSubFooterInner {
-		margin-left: auto;
-		margin-right: auto;
-		padding: 10px;
-		width: 920px;
-		background-color: #315E6F;
-		text-align: left;	
-		height:40px;
-		
-		border-top: 1px solid #427284;
-	}
+
 	
-	p#copyrightdecl {
-		clear:both;
-		color: #aaa;
-		padding-top:10px;
-		padding-bottom:10px;
-		font: 1.0em verdana, arial, sans-serif!important;
-	}
 
 table {
 		margin-left: 0px;
@@ -184,7 +117,7 @@ a:active {
     background: #5321d7;
 }
 
-a.greenbutton, input.form_button {
+a.greenbutton {
 	margin-left: 20px;
 	background: rgb(28, 184, 65); /* this is green */
 	color: #fff;

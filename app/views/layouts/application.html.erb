@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Fedex Aviva Circles</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+  	<title>Fedex Aviva Circles</title>
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
 	<link href="http://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet" type="text/css" />
-</head>
-<body>
+  </head>
+
+  <body>
 
 <div id="pageFrame">
-	<div id="pageHeaderOuter">
-		<div id="pageHeaderInner">
-			<div id="headerLeft">
+
 				<h1>Fedex Aviva Circles</h1>
-			</div>
-			<div id="headerRight">
+
+			<div id="logon" align="left">
 				<% if user_signed_in? %>
-					Signed in as <%= current_user.email %>. Not you?
-					<%= link_to "Edit profile", edit_user_registration_path %>
-					<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+					<%= current_user.email %>
 				<% else %>
 					<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
 				<% end %>
@@ -27,21 +38,42 @@
 					<%= content_tag :div, msg, id: "flash_#{name}" %>
 				<% end %>
 			</div>
-		</div>
+
+
+	<div id="navBar" class="row">
+	  <div class="large-8 columns">
+	    <!-- navigation -->
+		<div id="navMenu" class="row">
+			<% if user_signed_in? %>
+			 <% if Role.find(current_user.role_id).name == 'Customer' %>
+			  <div class="small-2 columns"><a href="/"><span>Home</span></a></div>
+			<% else %>	  
+			  <div class="small-2 columns"><a href="/"><span>Home</span></a></div>
+			  <div class="small-2 columns"><a href="circles"><span>Circle</span></a></div>			  
+			  <div class="small-2 columns"><a href="roles"><span>Roles</span></a></div>
+			  <div class="small-2 columns end"><a href="products"><span>Products</span></a></div>			  						
+			<% end %>
+		   <% end %>									  
+		</div>				  				  
+	  </div>
+	  <div id="points" class="large-4 columns">
+		  <div class="row" align="right">				
+		  <% if user_signed_in? %>
+			<%= Circle.find(current_user.circle_id).name %> : <%= Circle.find(current_user.circle_id).points %> points
+		  <% else %>
+			Welcome
+		  <% end %> </div>
+	  </div>
 	</div>
-	<div id="navOuter">
-		<div id="navInner">
-			<ul id="navlist">		
-				<li><a href="circles"><span>Circles</span></a></li>
-				<li><a href="users"><span>Users</span></a></li>
-				<li><a href="products"><span>Products</span></a></li>
-				<li><a href="policies"><span>Policies</span></a></li>				
-				<li class="navlast"><a href="roles"><span>Roles</span></a></li>				
-			</ul>
-		</div>
-	</div>
+	
+	
+
 	<div id="pageBodyOuter">
 		<div id="pageBodyInner">
+			
+
+		
+			
 			<!--<%= params.inspect %> <br/><br/>-->
 			<!-- 
 				<%= params.inspect %> <br/><br/>
@@ -49,22 +81,24 @@
 					<%= content_tag :div, msg, :id => "flash_#{name}" %>
 				<% end %>
 			-->		
-<%= yield %>
-		</div>
+	<%= yield %>
+		
 	</div>	
-	<div id="pageFooterOuter">
-		<div id="pageFooterInner">
-			<h3>Footer</h3>
-		</div>
-	</div>	
-	<div id="pageSubFooterOuter">
-		<div id="pageSubFooterInner">
-			<p id="copyrightdecl">		
-				Copyright 2015 Fedex Aviva Circles<br/>
-			</p>
+	<div id="pageSubFooterOuter" class = "row">
+		<div class = "large-4 columns" align="left"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></div>
+		<div class = "large-4 columns">Copyright 2015 Fedex Aviva Circles</p></div>
+		<div class = "large-4 columns" align="right">
+			<%= link_to image_tag("twitter.png"), url_for(host: 'www.twitter.com') %><%= link_to image_tag("facebook.png"), url_for(host: 'www.facebook.com') %>
 		</div>
 	</div>
 </div>
 
-</body>
+<script>
+	
+
+</script>
+
+    
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

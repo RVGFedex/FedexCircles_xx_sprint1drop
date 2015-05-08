@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :points_logs
+
+  resources :reward_takeups
+
+  resources :rewards do
+    member do
+	  get 'takeoffer' => 'rewards#takeoffer'
+    end
+  end
+
+  resources :params
+
+  get 'policies/setup' => 'policies#setup'	
+  post 'create_multi_policies' => 'policies#create_multi_policies'  
   resources :policies
 
   resources :products
@@ -6,8 +20,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
+  get 'circles/join' => 'circles#join'
+  post 'join_circle_submit' => 'circles#join_circle_submit'
   resources :circles
-
+  
   resources :roles
 
   # The priority is based upon order of creation: first created -> highest priority.

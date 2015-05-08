@@ -1,0 +1,76 @@
+<%= form_for(@policy, url: create_multi_policies_path(@policy), html: {method: "create_multi_policies"}) do |f| %>
+
+  <% if @policy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@policy.errors.count, "error") %> prohibited these policies from being saved:</h2>
+
+      <ul>
+      <% @policy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label for="policy_">Motor Policy</label><br>
+    <input id="policy_motor" name="policy_motor" type="string" />
+  </div>
+  
+  <div class="field">
+    <label for="policy_">Home Policy</label><br>
+    <input id="policy_home" name="policy_home" type="string" onblur="checkX()"/>
+    <div id="validateFailHome"><img height="125" width="125" src="../../assets/images/icon_delete.jpg" alt="fail"></div>
+    <div id="validatePassHome"><img height="125" width="125" src="../../assets/images/green_tick.png" alt="pass"></div>
+  </div>
+  
+  <div class="field">
+    <label for="policy_">Health Policy</label><br>
+    <input id="policy_health" name="policy_health" type="string" />
+  </div>
+  
+  <div class="field">
+    <label for="policy_">Pension Policy</label><br>
+    <input id="policy_pension" name="policy_pension" type="string" />
+  </div>
+  
+  <div class="field">
+    <label for="policy_">Life Assurance Policy</label><br>
+    <input id="policy_life" name="policy_life" type="string" />
+  </div>
+  
+  <div class="field">
+    <label for="policy_">Travel Policy</label><br>
+    <input id="policy_travel" name="policy_travel" type="string" />
+  </div>
+  
+  <br/>
+  <div class="actions">
+	<%= f.submit "Add Policies", :class => 'form_button'  %>
+  </div>  
+  
+<script>
+window.onload = function(){
+    document.getElementById('validateFailHome').style.display="none";
+	document.getElementById('validatePassHome').style.display="none";
+}
+
+function checkX(){
+    var string1=document.getElementById('policy_home').value;
+	
+    if (string1.indexOf("X")>-1){
+		document.getElementById('validatePassHome').style.display="none";
+		document.getElementById('validateFailHome').style.display="block";	
+    }
+	else if (string1.length>0){
+		document.getElementById('validateFailHome').style.display="none";
+		document.getElementById('validatePassHome').style.display="block";
+	}
+	else{
+	    document.getElementById('validateFailHome').style.display="none";
+		document.getElementById('validatePassHome').style.display="none";
+	} 
+}
+</script>  
+  
+<% end %>

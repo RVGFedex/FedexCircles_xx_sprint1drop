@@ -4,7 +4,11 @@ class CirclesController < ApplicationController
   # GET /circles
   # GET /circles.json
   def index
-    @circles = Circle.all
+  	if Role.find(current_user.role_id).name == 'Customer'  
+		@circles = Circle.where("id = ?",current_user.circle_id).all
+	else
+		@circles = Circle.all
+	end	
   end
 
   # GET /circles/1
@@ -16,6 +20,21 @@ class CirclesController < ApplicationController
   def new
     @circle = Circle.new
   end
+  
+  def join
+    @circle = Circle.new
+  end
+  
+  def join_circle_submit
+    user = User.find(current_user.id)
+	circle = Circle.where("group_code = ?", params[:group_code].to_s).first
+	
+	user.circle_id = circle.id
+	user.save
+	
+	redirect_to root_path	
+  end
+  
 
   # GET /circles/1/edit
   def edit
